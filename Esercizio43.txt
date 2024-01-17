@@ -1,0 +1,79 @@
+Spiegazione generica (Cos'è, a cosa serve, che problema risolve, differenze con JS semplice)
+
+typescript è un linguaggio di programmazione che è molto simile a javascript e serve a colmare alcune sue lacune.
+La principale differenza è che ts a differenza di js è a tipizzazione forte ovvero ogni variabile deve essere tipizzata (let stringa:string)="Hello world", let numero:number= 7 ...)
+
+Il compilatore TS (perché è necessario? e come si usa?)
+
+il compilatore ts ci serve per autocompilare un file javascript poichè i browser non sono in grado di leggere typescript (non ancora).
+per utilizzarlo basta inserire questo comando nel terminale "tsc +percorso del file ts +-w(opzionale serve per automatizzare il processo)"
+
+La Type Inference
+
+la capacità di un linguaggio di programmazione fortemente tipizzato di dedurre anche da solo la tipizzazione di una variabile (non si è costretti a inserirla manualmente)
+
+Il tipo ‘any’
+
+è una tipizzazione di ts.
+Significa che ad una variabile può essere assegnato un qualsiasi tipo di dato.
+
+Il tipo Union
+
+è una tipizzazione di ts che permette attraverso l'uso di pipe "|" di dare più possibilità di tipizzazione di una variabile es.
+let esempio: string | number= "ciao"
+
+esempio = 10
+questo non darà errore grazie alla tipizzazione union sopra dichiarata
+
+Il tipo Tuple
+
+è una struttura di tipizzazione che consente di utilizzare più tipi di dati differenti. es.
+
+let esempio : [number, string, boolean]
+
+esempio = [30, "banane", true]
+
+Le Interfaces in TS
+
+servono a definire la struttura dei tipi di oggetti. es.
+
+interface Persona {
+    nome: string;
+    età: number;
+    saluta(): void;
+}
+
+class PersonaImpl implements Persona {
+    constructor(public nome: string, public età: number) {}
+
+    saluta(): void {
+        console.log(`Ciao, mi chiamo ${this.nome} e ho ${this.età} anni.`);
+    }
+}
+
+let alice: Persona = new PersonaImpl("Alice", 30);
+
+alice.saluta();
+
+Types vs Interfaces
+
+le interfacce possono essere estese per crearne di nuove basate su quelle pre-esistenti.
+i Types possono rappresentare tipi più complessi.
+in generale è meglio usare le interfacce se stai lavorando con oggetti e vuoi usare la funzionalità di estensione e i types se devi fare lavori più complessi.
+
+I Generics
+
+Permettono di creare componenti (funzioni, classi, interfacce) che lavorano con diversi tipi di dati. I generics forniscono un modo flessibile per scrivere codice che è riutilizzabile e può adattarsi a vari tipi di dati senza dover scrivere implementazioni specifiche per ciascun tipo.
+
+es.
+
+function invertiArray<T>(array: T[]): T[] {
+    return array.reverse();
+}
+
+let numeri: number[] = [1, 2, 3, 4, 5];
+let numeriInvertiti: number[] = invertiArray(numeri);
+
+let stringhe: string[] = ["a", "b", "c"];
+let stringheInvertite: string[] = invertiArray(stringhe);
+
